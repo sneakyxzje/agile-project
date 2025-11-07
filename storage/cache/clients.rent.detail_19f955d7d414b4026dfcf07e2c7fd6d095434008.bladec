@@ -1,0 +1,118 @@
+<?php $_shouldextend[1]=1; ?>
+
+<?php $this->startSection('title', 'Lịch sử thuê Player'); ?>
+
+<?php $this->startSection('content'); ?>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+ 
+ <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+ <h1 class="text-3xl font-bold text-slate-800 dark:text-slate-100">Lịch sử thuê Player</h1>
+ 
+ <?php /* BỘ LỌC TRẠNG THÁI */ ?>
+ <div class="mt-4 sm:mt-0">
+ <label for="status-filter" class="sr-only">Lọc theo trạng thái</label>
+ <select id="status-filter" class="w-full sm:w-48 rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 focus:border-orange-500 focus:ring-orange-500 text-sm">
+ <option value="all">Tất cả trạng thái</option>
+ <option value="pending">Đang chờ</option>
+ <option value="accepted">Đã nhận</option>
+ <option value="completed">Hoàn thành</option>
+ <option value="cancelled">Đã hủy</option>
+ </select>
+ </div>
+ </div>
+
+ <?php /* HIỂN THỊ FLASH MESSAGE (nếu có) */ ?>
+ <?php /* (Code flash message của mày đặt ở đây) */ ?>
+
+ <?php /* BẢNG DỮ LIỆU */ ?>
+ <div class="bg-white dark:bg-[#2d2d2d] rounded-xl shadow-md overflow-hidden">
+ <div class="overflow-x-auto">
+ <table class="w-full text-sm text-left text-slate-500 dark:text-slate-400">
+ <thead class="text-xs text-slate-700 dark:text-slate-300 uppercase bg-slate-50 dark:bg-slate-800/50">
+ <tr>
+ <th scope="col" class="px-6 py-4">Player</th>
+ <th scope="col" class="px-6 py-4">Thời gian</th>
+ <th scope="col" class="px-6 py-4">Tổng chi phí</th>
+ <th scope="col" class="px-6 py-4">Trạng thái</th>
+ <th scope="col" class="px-6 py-4 text-right">Hành động</th>
+ </tr>
+ </thead>
+ <tbody>
+ <?php $__empty_1 = true; foreach($rentDetails as $detail): $__empty_1 = false; ?>
+ <tr class="border-b border-slate-100 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-800/40">
+ <?php /* Cột Player */ ?>
+ <td class="px-6 py-4 font-medium text-slate-900 dark:text-white whitespace-nowrap">
+ <div class="flex items-center gap-3">
+ <img src="/project/<?php echo \htmlentities($detail['bplayer_image']??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="Player" class="w-10 h-10 rounded-full object-cover">
+ <div>
+ <div class="font-bold"><?php echo \htmlentities($detail['bplayer_name']??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ <div class="text-xs text-slate-500">Đặt lúc: <?php echo \htmlentities($detail['created_at']??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ </div>
+ </div>
+ </td>
+ <?php /* Cột Thời gian */ ?>
+ <td class="px-6 py-4">
+ <?php echo \htmlentities($detail['hours']??'', ENT_QUOTES, 'UTF-8', false); ?> giờ
+ </td>
+ <?php /* Cột Chi phí */ ?>
+ <td class="px-6 py-4 font-semibold">
+ <?php echo \htmlentities($detail['amount']??'', ENT_QUOTES, 'UTF-8', false); ?> <i class="fas fa-gem text-[#f48024]"></i>
+ </td>
+ <?php /* Cột Trạng thái */ ?>
+ <td class="px-6 py-4">
+ <?php if($detail['status'] == 'pending'): ?>
+ <span class="status-badge bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400">Đang chờ</span>
+ <?php elseif($detail['status'] == 'accepted'): ?>
+ <span class="status-badge bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">Đã nhận</span>
+ <?php elseif($detail['status'] == 'completed'): ?>
+ <span class="status-badge bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Hoàn thành</span>
+ <?php else: ?>
+ <span class="status-badge bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">Đã hủy</span>
+ <?php endif; ?>
+ </td>
+ <?php /* Cột Hành động */ ?>
+ <td class="px-6 py-4 text-right">
+ <?php if($detail['status'] == 'accepted'): ?>
+ <form action="/project/rent-confirm/<?php echo \htmlentities($detail['id']??'', ENT_QUOTES, 'UTF-8', false); ?>" method="POST">
+ <button type="submit" name="action" value="confirm" class="action-button-confirm">
+ Xác nhận hoàn thành
+ </button>
+ </form>
+ <?php elseif($detail['status'] == 'completed'): ?>
+ <button class="action-button-review">Đánh giá</button>
+ <?php else: ?>
+ <a href="/project/bplayer/<?php echo \htmlentities($detail['bplayer_id']??'', ENT_QUOTES, 'UTF-8', false); ?>" class="action-button-details">Xem chi tiết</a>
+ <?php endif; ?>
+ </td>
+ </tr>
+ <?php endforeach; if ($__empty_1): ?>
+ <tr>
+ <td colspan="5" class="text-center py-12">
+ <p class="text-slate-500">Không tìm thấy đơn hàng nào.</p>
+ </td>
+ </tr>
+ <?php endif; ?>
+ </tbody>
+ </table>
+ </div>
+ 
+ <?php /* KHỐI PHÂN TRANG */ ?>
+ <?php if($totalPages > 1): ?>
+ <div class="p-4 border-t border-slate-100 dark:border-slate-700/50">
+ <?php echo $this->runChild('components.pagination', ['totalPages' => $totalPages, 'currentPage' => $currentPage]); ?>
+ </div>
+ <?php endif; ?>
+ </div>
+</div>
+<?php $this->stopSection(); ?>
+
+<?php $this->startPush('styles'); ?>
+<style>
+ .status-badge { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium; }
+ .action-button-details { @apply font-medium text-slate-600 dark:text-slate-300 hover:underline; }
+ .action-button-confirm { @apply font-semibold text-sm text-white bg-[#f48024] hover:bg-orange-600 rounded-lg px-3 py-2 transition-all; }
+ .action-button-review { @apply font-semibold text-sm text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 hover:bg-blue-200 dark:hover:bg-blue-900/50 rounded-lg px-3 py-2 transition-all; }
+</style>
+<?php $this->stopPush(); ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layouts.app'); } ?>

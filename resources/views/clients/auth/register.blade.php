@@ -1,0 +1,46 @@
+@extends('layouts.app')
+
+@section('title', 'Register')
+
+@section('content')
+<div class="flex items-center justify-center min-h-screen transition-all duration-300">
+  <div class="w-full max-w-md bg-white dark:bg-[#2d2d2d] shadow-xl rounded-2xl p-8 mt-10 mx-4 transition-all duration-300">
+    <h2 class="text-2xl font-bold text-center mb-6 text-gray-800 dark:text-gray-100">Đăng ký tài khoản</h2>
+
+    <form action="{{ route('register-handle') }}" method="POST" class="space-y-5">
+        <div>
+            <label class="block text-gray-700 dark:text-gray-200 mb-2 font-medium">Họ và tên</label>
+            <input type="text" name="fullname" required placeholder="Required fields"  autocomplete="off"
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-orange-400 focus:outline-none bg-white dark:bg-[#3a3a3a] text-gray-900 dark:text-gray-100 transition-all duration-300" />
+        </div>
+
+        <div>
+            <label class="block text-gray-700 dark:text-gray-200 mb-2 font-medium">Username</label>
+            <input type="text" name="username" required placeholder="Required fields" autocomplete="off"
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-orange-400 focus:outline-none bg-white dark:bg-[#3a3a3a] text-gray-900 dark:text-gray-100 transition-all duration-300" />
+        </div>
+      <div>
+        <label class="block text-gray-700 dark:text-gray-200 mb-2 font-medium">Email</label>
+        <input type="email" name="email" required placeholder="Nhập email của bạn"  autocomplete="off"
+          class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-orange-400 focus:outline-none bg-white dark:bg-[#3a3a3a] text-gray-900 dark:text-gray-100 transition-all duration-300" />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 dark:text-gray-200 mb-2 font-medium">Mật khẩu</label>
+        <input type="password" name="password" required placeholder="Nhập mật khẩu"
+          class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-orange-400 focus:outline-none bg-white dark:bg-[#3a3a3a] text-gray-900 dark:text-gray-100 transition-all duration-300" />
+      </div>
+
+      <button type="submit"
+        class="w-full bg-gradient-to-r from-orange-500 to-orange-400 text-white py-3 rounded-lg font-medium hover:shadow-lg hover:scale-[1.02] transition-all duration-200">
+        Đăng ký
+      </button>
+    </form>
+
+    <p class="mt-6 text-center text-gray-600 dark:text-gray-300">
+        Đã có tài khoản?
+      <a href="/project/login" class="text-orange-500 hover:text-orange-600 font-medium">Đăng nhập</a>
+    </p>
+  </div>
+</div>
+@endsection

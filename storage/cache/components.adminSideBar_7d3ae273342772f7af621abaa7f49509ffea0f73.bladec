@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Sidebar Sync Demo</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <script src="https://cdn.tailwindcss.com"></script>
+ <script>
+ tailwind.config = {
+ darkMode: 'class'
+ }
+ </script>
+ <style>
+ body {
+ transition: padding-top 0.3s ease;
+ }
+
+ @media (min-width: 768px) {
+ body {
+ padding-left: 280px;
+ }
+ }
+
+ .sidebar-container {
+ top: 0;
+ height: 100vh;
+ transition: top 0.3s ease, height 0.3s ease;
+ }
+
+
+ .sidebar-container::-webkit-scrollbar {
+ width: 6px;
+ }
+
+ .sidebar-container::-webkit-scrollbar-track {
+ background: transparent;
+ }
+
+ body:not(.dark) .sidebar-container::-webkit-scrollbar-thumb {
+ background: #d6d9dc;
+ border-radius: 3px;
+ }
+
+ body.dark .sidebar-container::-webkit-scrollbar-thumb {
+ background: #4a4a4a;
+ border-radius: 3px;
+ }
+
+ .category-toggle.collapsed {
+ transform: rotate(-90deg);
+ }
+
+ .category-content.collapsed {
+ max-height: 0 !important;
+ }
+
+ .hot-icon {
+ animation: pulse 2s infinite;
+ }
+
+ @keyframes pulse {
+ 0%, 100% { opacity: 1; }
+ 50% { opacity: 0.6; }
+ }
+
+ .sidebar-container {
+ display: none;
+ }
+
+ @media (min-width: 768px) {
+ .sidebar-container {
+ display: block;
+ }
+ }
+ </style>
+</head>
+<body class="bg-[#f1f2f3] dark:bg-[#1c1d1f] transition-colors duration-300">
+ <aside class="sidebar-container fixed left-0 overflow-y-auto w-[280px] bg-white dark:bg-[#2d2d2d] border-r border-[#d6d9dc] dark:border-[#3f4042]">
+ <div class="category">
+ <a href="/project/admin/dashboard" class="flex items-center justify-between px-4 py-3.5 font-semibold text-sm uppercase tracking-wide cursor-pointer select-none transition-all duration-200 bg-[#f8f9f9] dark:bg-[#232426] text-[#232629] dark:text-[#e3e6e8] border-b border-[#e3e6e8] dark:border-[#3f4042]" 
+ >
+ <div class="flex items-center gap-2">
+ <span>Dashboard</span>
+ </div>
+ </a>
+ </div>
+
+ <div class="category">
+ <div class="flex items-center justify-between px-4 py-3.5 font-semibold text-sm uppercase tracking-wide cursor-pointer select-none transition-all duration-200 bg-[#f8f9f9] dark:bg-[#232426] text-[#232629] dark:text-[#e3e6e8] border-b border-[#e3e6e8] dark:border-[#3f4042]" 
+ onclick="toggleCategory('pc')">
+ <div class="flex items-center gap-2">
+ <span>User Managerment</span>
+ </div>
+ <i class="fas fa-chevron-down category-toggle transition-transform duration-300 text-[#525960] dark:text-[#9fa6ad]" id="toggle-pc"></i>
+ </div>
+ <div class="category-content transition-all duration-300 overflow-hidden" id="content-pc" style="max-height: 1000px;">
+ <a href="/project/admin/users" class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 text-sm text-[#525960] dark:text-[#9fa6ad] border-b border-[#f1f2f3] dark:border-[#3a3a3a] hover:bg-[#f8f9f9] dark:hover:bg-[#3a3a3a]">
+ <span> > Danh sách user</span>
+ </a>
+ </div>
+ </div>
+
+ <!-- Game Mobile -->
+ <div class="category">
+ <div class="flex items-center justify-between px-4 py-3.5 font-semibold text-sm uppercase tracking-wide cursor-pointer select-none transition-all duration-200 bg-[#f8f9f9] dark:bg-[#232426] text-[#232629] dark:text-[#e3e6e8] border-b border-[#e3e6e8] dark:border-[#3f4042]" 
+ onclick="toggleCategory('mobile')">
+ <div class="flex items-center gap-2">
+ <span>BPlayer Management</span>
+ </div>
+ <i class="fas fa-chevron-down category-toggle transition-transform duration-300 text-[#525960] dark:text-[#9fa6ad]" id="toggle-mobile"></i>
+ </div>
+ <div class="category-content transition-all duration-300 overflow-hidden" id="content-mobile" style="max-height: 1000px;">
+ <a href="/project/admin/rents/pending" class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 text-sm text-[#525960] dark:text-[#9fa6ad] border-b border-[#f1f2f3] dark:border-[#3a3a3a] hover:bg-[#f8f9f9] dark:hover:bg-[#3a3a3a]">
+ <span> > Pending</span>
+ </a>
+ <a href="/project/admin/bplayers/list" class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 text-sm text-[#525960] dark:text-[#9fa6ad] border-b border-[#f1f2f3] dark:border-[#3a3a3a] hover:bg-[#f8f9f9] dark:hover:bg-[#3a3a3a]">
+ <span> > BPlayer List</span>
+ </a>
+ </div>
+ </div>
+ <div class="p-4 border-t border-[#d6d9dc] dark:border-[#3f4042]">
+ <button onclick="toggleTheme()" class="w-full justify-center flex items-center gap-2 p-2.5 rounded-md transition-all bg-[#e3e6e8] dark:bg-[#3a3a3a] hover:bg-[#d6d9dc] dark:hover:bg-[#4a4a4a] text-sm font-semibold text-[#525960] dark:text-[#9fa6ad]">
+ <i class="fas fa-sun text-amber-500" id="sunIcon"></i>
+ <i class="fas fa-moon text-blue-400 hidden" id="moonIcon"></i>
+ <span>Chuyển chế độ</span>
+ </button>
+ </div>
+ <div class="p-4 border-t border-[#d6d9dc] dark:border-[#3f4042]">
+ <a href="/project" class="w-full justify-center flex items-center gap-2 p-2.5 rounded-md transition-all bg-[#e3e6e8] dark:bg-[#3a3a3a] hover:bg-[#d6d9dc] dark:hover:bg-[#4a4a4a] text-sm font-semibold text-[#525960] dark:text-[#9fa6ad]">
+ <span>Đi đến trang web</span>
+ </a>
+ </div>
+ </aside>
+</body>
+
+<script>
+ const avatarButton = document.getElementById('avatar-button');
+ const dropdownMenu = document.getElementById('dropdown-menu');
+
+ avatarButton.addEventListener('click', function(event) {
+ event.stopPropagation();
+ dropdownMenu.classList.toggle('hidden');
+ });
+
+ window.addEventListener('click', function(event) {
+ if (!dropdownMenu.classList.contains('hidden')) {
+ dropdownMenu.classList.add('hidden');
+ }
+ });
+
+ dropdownMenu.addEventListener('click', function(event) {
+ event.stopPropagation();
+ });
+ </script>
+</html>

@@ -1,0 +1,129 @@
+<?php $_shouldextend[1]=1; ?>
+
+<?php $this->startSection('title', 'Dashboard'); ?>
+
+<?php $this->startSection('content'); ?>
+<div class="min-h-screen p-6 transition-colors duration-300">
+ <div class="mb-6">
+ <h1 class="text-2xl font-bold text-[#232629] dark:text-[#e3e6e8]">Dashboard</h1>
+ <p class="text-sm text-[#525960] dark:text-[#9fa6ad] mt-1">Tổng quan hệ thống</p>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+ <div class="bg-white dark:bg-[#2d2d2d] rounded-lg p-6 border border-[#d6d9dc] dark:border-[#3f4042] transition-all duration-200 hover:shadow-lg">
+ <div class="flex items-center justify-between">
+ <div>
+ <p class="text-sm text-[#525960] dark:text-[#9fa6ad] mb-1">Tổng Users</p>
+ <h3 class="text-3xl font-bold text-[#232629] dark:text-[#e3e6e8]"><?php echo \htmlentities($allUser??'', ENT_QUOTES, 'UTF-8', false); ?></h3>
+ </div>
+ <div class="w-14 h-14 rounded-full bg-[#f8f9f9] dark:bg-[#232426] flex items-center justify-center">
+ <i class="fas fa-users text-2xl text-blue-500"></i>
+ </div>
+ </div>
+ </div>
+
+ <div class="bg-white dark:bg-[#2d2d2d] rounded-lg p-6 border border-[#d6d9dc] dark:border-[#3f4042] transition-all duration-200 hover:shadow-lg">
+ <div class="flex items-center justify-between">
+ <div>
+ <p class="text-sm text-[#525960] dark:text-[#9fa6ad] mb-1">Tổng BPlayer</p>
+ <h3 class="text-3xl font-bold text-[#232629] dark:text-[#e3e6e8]"><?php echo \htmlentities($allBPlayer??'', ENT_QUOTES, 'UTF-8', false); ?></h3>
+ </div>
+ <div class="w-14 h-14 rounded-full bg-[#f8f9f9] dark:bg-[#232426] flex items-center justify-center">
+ <i class="fas fa-gamepad text-2xl text-purple-500"></i>
+ </div>
+ </div>
+ </div>
+
+ <div class="bg-white dark:bg-[#2d2d2d] rounded-lg p-6 border border-[#d6d9dc] dark:border-[#3f4042] transition-all duration-200 hover:shadow-lg">
+ <div class="flex items-center justify-between">
+ <div>
+ <p class="text-sm text-[#525960] dark:text-[#9fa6ad] mb-1">Đơn thuê chờ duyệt</p>
+ <h3 class="text-3xl font-bold text-[#232629] dark:text-[#e3e6e8]"><?php echo \htmlentities($pendingRentsCount??'', ENT_QUOTES, 'UTF-8', false); ?></h3>
+ <?php if($pendingRentsCount > 0): ?>
+ <p class="text-xs text-amber-500 mt-2"><i class="fas fa-clock"></i> Cần xử lý</p>
+ <?php endif; ?>
+ </div>
+ <div class="w-14 h-14 rounded-full bg-[#f8f9f9] dark:bg-[#232426] flex items-center justify-center">
+ <i class="fas fa-file-invoice text-2xl text-amber-500"></i>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+ <div class="bg-white dark:bg-[#2d2d2d] rounded-lg p-6 border border-[#d6d9dc] dark:border-[#3f4042]">
+ <h3 class="text-lg font-semibold text-[#232629] dark:text-[#e3e6e8] mb-4">Hoạt động gần đây</h3>
+ <div class="space-y-3">
+ <?php /* User mới đăng ký */ ?>
+ <?php $__empty_1 = true; foreach($latestUsers as $user): $__empty_1 = false; ?>
+ <div class="flex items-center gap-3 p-3 bg-[#f8f9f9] dark:bg-[#232426] rounded-lg">
+ <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center"><i class="fas fa-user text-white text-xs"></i></div>
+ <div class="flex-1">
+ <p class="text-sm text-[#232629] dark:text-[#e3e6e8]">User <span class="font-bold"><?php echo \htmlentities($user['fullname']??'', ENT_QUOTES, 'UTF-8', false); ?></span> mới đăng ký</p>
+ <p class="text-xs text-[#525960] dark:text-[#9fa6ad]"><?php echo \htmlentities($user['created_at']??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ </div>
+ </div>
+ <?php endforeach; if ($__empty_1): ?>
+ <p class="text-sm text-center py-2 text-[#525960] dark:text-[#9fa6ad]">Chưa có user nào mới.</p>
+ <?php endif; ?>
+ 
+ <?php /* BPlayer mới đăng ký */ ?>
+ <?php $__empty_1 = true; foreach($latestBPlayers as $bplayer): $__empty_1 = false; ?>
+ <div class="flex items-center gap-3 p-3 bg-[#f8f9f9] dark:bg-[#232426] rounded-lg">
+ <div class="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center"><i class="fas fa-gamepad text-white text-xs"></i></div>
+ <div class="flex-1">
+ <p class="text-sm text-[#232629] dark:text-[#e3e6e8]"><span class="font-bold"><?php echo \htmlentities($bplayer['nickname']??'', ENT_QUOTES, 'UTF-8', false); ?></span> mới đăng ký thành BPlayer</p>
+ <p class="text-xs text-[#525960] dark:text-[#9fa6ad]"><?php echo \htmlentities($bplayer['created_at']??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ </div>
+ </div>
+ <?php endforeach; if ($__empty_1): ?>
+ <p class="text-sm text-center py-2 text-[#525960] dark:text-[#9fa6ad]">Chưa có BPlayer nào mới.</p>
+ <?php endif; ?>
+
+ <?php /* Đơn thuê hoàn thành */ ?>
+ <?php $__empty_1 = true; foreach($latestCompletedRents as $rent): $__empty_1 = false; ?>
+ <div class="flex items-center gap-3 p-3 bg-[#f8f9f9] dark:bg-[#232426] rounded-lg">
+ <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center"><i class="fas fa-check text-white text-xs"></i></div>
+ <div class="flex-1">
+ <p class="text-sm text-[#232629] dark:text-[#e3e6e8]">Đơn <span class="font-bold">#<?php echo \htmlentities($rent['id']??'', ENT_QUOTES, 'UTF-8', false); ?></span> vừa hoàn thành</p>
+ <p class="text-xs text-[#525960] dark:text-[#9fa6ad]"><?php echo \htmlentities($rent['updated_at']??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ </div>
+ <span class="text-sm font-bold text-green-500"><?php echo \htmlentities($rent['amount']??'', ENT_QUOTES, 'UTF-8', false); ?>💎</span>
+ </div>
+ <?php endforeach; if ($__empty_1): ?>
+ <p class="text-sm text-center py-2 text-[#525960] dark:text-[#9fa6ad]">Chưa có đơn thuê nào hoàn thành gần đây.</p>
+ <?php endif; ?>
+ </div>
+ </div>
+ <div class="bg-white dark:bg-[#2d2d2d] rounded-lg p-6 border border-[#d6d9dc] dark:border-[#3f4042]">
+ <h3 class="text-lg font-semibold text-[#232629] dark:text-[#e3e6e8] mb-4">Top BPlayer nổi bật</h3>
+ <div class="space-y-3">
+
+ <?php $__empty_1 = true; foreach($topBPlayers as $bplayer): $__empty_1 = false; ?>
+ <div class="flex items-center gap-3 p-3 bg-[#f8f9f9] dark:bg-[#232426] rounded-lg">
+ <?php /* AVATAR CỦA BPLAYER */ ?>
+ <img src="/project/<?php echo \htmlentities($bplayer['main_image']??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($bplayer['nickname']??'', ENT_QUOTES, 'UTF-8', false); ?>" 
+ class="w-10 h-10 rounded-full object-cover flex-shrink-0 border-2 border-white/50 dark:border-black/50">
+
+ <?php /* TÊN VÀ SỐ ĐƠN THUÊ */ ?>
+ <div class="flex-1 min-w-0">
+ <p class="text-sm font-semibold text-[#232629] dark:text-[#e3e6e8] truncate"><?php echo \htmlentities($bplayer['nickname']??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ <p class="text-xs text-[#525960] dark:text-[#9fa6ad]"><?php echo \htmlentities($bplayer['rent_count']??'', ENT_QUOTES, 'UTF-8', false); ?> đơn thuê</p>
+ </div>
+
+ <?php /* TỔNG THU NHẬP */ ?>
+ <div class="text-right flex-shrink-0">
+ <p class="text-sm font-bold text-green-500"><?php echo \htmlentities(number_format($bplayer['total_earnings'])??'', ENT_QUOTES, 'UTF-8', false); ?>💎</p>
+ </div>
+ </div>
+ <?php endforeach; if ($__empty_1): ?>
+ <p class="text-sm text-center py-10 text-[#525960] dark:text-[#9fa6ad]">Chưa có dữ liệu xếp hạng.</p>
+ <?php endif; ?>
+ 
+ </div>
+</div>
+ </div>
+</div>
+
+<?php $this->stopSection(); ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layouts.admin'); } ?>

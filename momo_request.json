@@ -1,0 +1,15 @@
+{
+    "partnerCode": "MOMO",
+    "partnerName": "Test",
+    "storeId": "MomoTestStore",
+    "requestId": "1760673157",
+    "amount": "5000000",
+    "orderId": "1760673157",
+    "orderInfo": "N\u1ea1p kim c\u01b0\u01a1ng v\u00e0o t\u00e0i kho\u1ea3n",
+    "redirectUrl": "http:\/\/localhost\/project\/momo\/return",
+    "ipnUrl": "https:\/\/interacademic-georgeann-unrelenting.ngrok-free.dev\/project\/momo\/ipn",
+    "lang": "vi",
+    "extraData": "eyJpZCI6IjcifQ==",
+    "requestType": "payWithATM",
+    "signature": "b41d522519e6a03a0501802a4a659f77ff244ddd3316857980692d580e364566"
+}

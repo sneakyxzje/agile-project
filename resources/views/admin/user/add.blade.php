@@ -1,0 +1,90 @@
+@extends('layouts.admin')
+
+@section('title', 'Thêm User mới')
+
+@section('content')
+<div class="min-h-screen p-6 transition-colors duration-300">
+    
+    @php
+        $successMessage = session_flash('success');
+        $errorMessage = session_flash('error');
+    @endphp
+    @if ($errorMessage)
+        <div class="mb-4 p-4 rounded-lg border-l-4 flex items-start bg-red-100 dark:bg-red-900/30 border-red-500 text-red-700 dark:text-red-300" role="alert">
+            <div class="flex-shrink-0"><i class="fas fa-exclamation-triangle text-lg"></i></div>
+            <div class="ml-3 flex-grow"><p class="font-semibold">{{ $errorMessage }}</p></div>
+            <button type="button" class="ml-4 p-1.5 rounded-full hover:bg-black/10" onclick="this.parentElement.style.display='none'"><i class="fas fa-times text-sm"></i></button>
+        </div>
+    @endif
+    
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h1 class="text-3xl font-bold text-[#232629] dark:text-[#e3e6e8]">Thêm người dùng mới</h1>
+        </div>
+        <a href="/project/admin/users" class="flex items-center px-4 py-2 text-sm font-semibold text-[#525960] dark:text-[#9fa6ad] bg-white dark:bg-[#2d2d2d] border border-[#d6d9dc] dark:border-[#3f4042] rounded-lg hover:bg-[#f8f9f9] dark:hover:bg-[#3a3a3a] transition-colors">
+            <i class="fas fa-arrow-left mr-2"></i>
+            Quay lại danh sách
+        </a>
+    </div>
+
+    <form action="/project/admin/users/create" method="POST">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2">
+                <div class="bg-white dark:bg-[#2d2d2d] rounded-xl shadow-md border border-[#d6d9dc] dark:border-[#3f4042]">
+                    <div class="p-6 border-b border-[#d6d9dc] dark:border-[#3f4042]">
+                        <h3 class="text-lg font-semibold text-[#232629] dark:text-[#e3e6e8]">Thông tin tài khoản</h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <label for="fullname" class="form-label">Họ và tên</label>
+                            <input type="text" id="fullname" name="fullname" class="form-input" placeholder="Fullname">
+                        </div>
+                        <div>
+                            <label for="fullname" class="form-label">Username</label>
+                            <input type="text" id="username" name="username" class="form-input" placeholder="">
+                        </div>
+                        <div>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="example@email.com">
+                        </div>
+                        <div>
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <input type="password" id="password" name="password" class="form-input" placeholder="Nhập mật khẩu">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-6">
+                <div class="bg-white dark:bg-[#2d2d2d] rounded-xl shadow-md border border-[#d6d9dc] dark:border-[#3f4042]">
+                    <div class="p-6 border-b border-[#d6d9dc] dark:border-[#3f4042]"><h3 class="text-lg font-semibold text-[#232629] dark:text-[#e3e6e8]">Vai trò</h3></div>
+                    <div class="p-6">
+                        <select name="role" class="form-input">
+                            <option value="user" selected>User</option>
+                            <option value="bplayer">BPlayer</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-[#2d2d2d] rounded-xl shadow-md border border-[#d6d9dc] dark:border-[#3f4042]">
+                    <div class="p-6 border-b border-[#d6d9dc] dark:border-[#3f4042]"><h3 class="text-lg font-semibold text-[#232629] dark:text-[#e3e6e8]">Số dư kim cương</h3></div>
+                    <div class="p-6">
+                         <input type="number" name="diamond" class="form-input" value="0">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-6">
+            <button type="submit" class="px-6 py-3 bg-[#f48024] text-white font-bold text-sm rounded-lg shadow-md hover:bg-orange-600 transition-colors">
+                Tạo mới
+            </button>
+        </div>
+    </form>
+</div>
+@endsection
+
+@push('styles')
+<style>
+    .form-label { @apply block mb-2 text-sm font-semibold text-[#232629] dark:text-[#e3e6e8]; }
+    .form-input { @apply block w-full px-4 py-2 text-sm text-[#232629] dark:text-[#e3e6e8] bg-white dark:bg-[#232426] border border-[#d6d9dc] dark:border-[#3f4042] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f48024] transition; }
+</style>
+@endpush

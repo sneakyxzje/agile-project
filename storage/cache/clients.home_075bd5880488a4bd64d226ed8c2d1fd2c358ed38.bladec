@@ -1,0 +1,219 @@
+<?php $_shouldextend[1]=1; ?>
+
+<?php $this->startSection('content'); ?>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+ <div class="mb-8">
+ <div class="relative bg-[#232426] rounded-2xl overflow-hidden border border-[#3f4042] shadow-2xl shadow-black/20">
+ 
+ <div class="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 bg-[#f48024]/10 rounded-full blur-3xl animate-pulse"></div>
+ <div class="absolute -bottom-1/4 -left-1/4 w-1/2 h-1/2 bg-blue-500/10 rounded-full blur-3xl"></div>
+
+ <div class="relative z-10 text-center py-20 px-6">
+ <h1 class="text-4xl lg:text-5xl font-extrabold text-white mb-4">
+ Tìm Đồng Đội, <span class="bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">Phá Đảo Mọi Game</span>
+ </h1>
+
+ <p class="max-w-2xl mx-auto text-lg text-[#9fa6ad]">
+ Nền tảng kết nối game thủ hàng đầu Việt Nam. Tìm kiếm, thuê, và trải nghiệm những trận đấu đỉnh cao cùng các BPlayer chuyên nghiệp.
+ </p>
+
+<div class="mt-8 max-w-sm mx-auto">
+ <?php if(empty($_SESSION['user'])): ?>
+ <?php /* NẾU CHƯA ĐĂNG NHẬP: HIỆN NÚT "BẮT ĐẦU NGAY" */ ?>
+ <a href="/project/login" 
+ class="block w-full px-8 py-4 text-lg font-bold text-center text-white rounded-full 
+ bg-gradient-to-r from-[#f48024] to-[#f69c55] 
+ shadow-lg shadow-orange-500/30 
+ hover:scale-105 hover:shadow-xl hover:shadow-orange-500/40 
+ transition-all duration-300">
+ Bắt đầu ngay
+ </a>
+ <?php else: ?>
+ <a href="#all-players"
+ class="block w-full px-8 py-4 text-lg font-bold text-center text-white rounded-full 
+ bg-gradient-to-r from-[#f48024] to-[#f69c55] 
+ shadow-lg shadow-orange-500/30 
+ hover:scale-105 hover:shadow-xl hover:shadow-orange-500/40 
+ transition-all duration-300">
+ Thuê ngay
+ </a>
+ <?php endif; ?>
+</div>
+ </div>
+ </div>
+</div>
+ <!-- Search & Filter Section -->
+ <div class="mb-6 space-y-4">
+ <div class="relative">
+ <input type="text" 
+ id="search-input"
+ placeholder="Tìm kiếm" 
+ class="w-full px-4 py-3 pl-12 rounded-lg border border-[#d6d9dc] dark:border-[#3f4042] bg-white dark:bg-[#2d2d2d] text-[#0c0d0e] dark:text-[#e3e6e8] focus:outline-none focus:ring-2 focus:ring-[#f48024] transition-all">
+ <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-[#525960] dark:text-[#9fa6ad]"></i>
+ </div>
+
+ <div class="flex flex-wrap gap-3">
+ <button onclick="toggleFilter('gender')" 
+ class="flex items-center gap-2 px-4 py-2 rounded-lg border border-[#d6d9dc] dark:border-[#3f4042] bg-white dark:bg-[#2d2d2d] text-[#525960] dark:text-[#9fa6ad] hover:border-[#f48024] hover:text-[#f48024] transition-all">
+ <i class="fas fa-venus-mars"></i>
+ <span>Giới tính</span>
+ <i class="fas fa-chevron-down text-xs"></i>
+ </button>
+
+ <button onclick="toggleFilter('city')" 
+ class="flex items-center gap-2 px-4 py-2 rounded-lg border border-[#d6d9dc] dark:border-[#3f4042] bg-white dark:bg-[#2d2d2d] text-[#525960] dark:text-[#9fa6ad] hover:border-[#f48024] hover:text-[#f48024] transition-all">
+ <i class="fas fa-map-marker-alt"></i>
+ <span>Thành phố</span>
+ <i class="fas fa-chevron-down text-xs"></i>
+ </button>
+
+ <button onclick="toggleFilter('price')" 
+ class="flex items-center gap-2 px-4 py-2 rounded-lg border border-[#d6d9dc] dark:border-[#3f4042] bg-white dark:bg-[#2d2d2d] text-[#525960] dark:text-[#9fa6ad] hover:border-[#f48024] hover:text-[#f48024] transition-all">
+ <i class="fas fa-dollar-sign"></i>
+ <span>Giá cả</span>
+ <i class="fas fa-chevron-down text-xs"></i>
+ </button>
+
+ <button onclick="toggleFilter('sort')" 
+ class="flex items-center gap-2 px-4 py-2 rounded-lg border border-[#d6d9dc] dark:border-[#3f4042] bg-white dark:bg-[#2d2d2d] text-[#525960] dark:text-[#9fa6ad] hover:border-[#f48024] hover:text-[#f48024] transition-all">
+ <i class="fas fa-sort"></i>
+ <span>Sắp xếp</span>
+ <i class="fas fa-chevron-down text-xs"></i>
+ </button>
+
+ <button onclick="clearFilters()" 
+ class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#f48024] text-white hover:bg-[#f69c55] transition-all">
+ <i class="fas fa-redo"></i>
+ <span>Tìm kiếm</span>
+ </button>
+ </div>
+ </div>
+
+ <!-- Hot Players Section -->
+ <div class="mb-6">
+ <div class="flex items-center justify-between mb-4">
+ <h2 id="all-players"class="text-2xl font-bold text-[#0c0d0e] dark:text-[#e3e6e8] flex items-center gap-2">
+ <i class="fas fa-star text-yellow-500"></i>
+ All Players
+ </h2>
+ </div>
+
+ <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+ <?php $__currentLoopData = $bPlayers; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $bPlayer): $loop = $this->incrementLoopIndices();  ?>
+ <a href="/project/bplayer/<?php echo \htmlentities($bPlayer['id']??'', ENT_QUOTES, 'UTF-8', false); ?>" class="player-card bg-white dark:bg-[#2d2d2d] rounded-xl overflow-hidden border border-[#d6d9dc] dark:border-[#3f4042] shadow-sm hover:shadow-lg transition-all cursor-pointer">
+ <div class="relative h-64 bg-gradient-to-br from-purple-400 to-pink-400 overflow-hidden">
+ <img src="/project/<?php echo \htmlentities($bPlayer['main_image']??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="Player" class="w-full h-full object-cover">
+ 
+ <div class="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 rounded-full bg-black/50 backdrop-blur-sm">
+ <span class="w-2 h-2 rounded-full bg-green-500 online-pulse"></span>
+ <span class="text-xs text-white font-medium">Online</span>
+ </div>
+
+ <div class="absolute top-3 right-3 px-2 py-1 rounded-full bg-red-500 text-white text-xs font-bold flex items-center gap-1">
+ <i class="fas fa-fire"></i>
+ HOT
+ </div>
+
+ <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
+ <i class="fas fa-check text-white text-xs"></i>
+ </div>
+ </div>
+
+ <div class="p-4">
+ <div class="mb-3">
+ <div class="flex items-center justify-between mb-1">
+ <h3 class="font-bold text-[#0c0d0e] dark:text-[#e3e6e8] truncate"><?php echo \htmlentities($bPlayer['nickname']??'', ENT_QUOTES, 'UTF-8', false); ?></h3>
+ <div class="flex items-center gap-1">
+ <i class="fas fa-star text-yellow-500 text-sm"></i>
+ <span class="text-sm font-semibold text-[#0c0d0e] dark:text-[#e3e6e8]">4.9</span>
+ </div>
+ </div>
+ <p class="text-sm text-[#525960] dark:text-[#9fa6ad]">ID: <?php echo \htmlentities($bPlayer['id']??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ </div>
+
+ <div class="flex flex-wrap gap-1 mb-3">
+ <?php $__currentLoopData = json_decode($bPlayer['games'], true); $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $game): $loop = $this->incrementLoopIndices();  ?>
+ <span class="px-2 py-1 text-xs rounded-full bg-[#fff4e6] dark:bg-[#3a2e1f] text-[#f48024] border border-[#f1e5bc] dark:border-[#4a4a4a]">
+ <?php echo \htmlentities(strtoupper($game)??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </span>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+
+ <p class="text-sm text-[#525960] dark:text-[#9fa6ad] line-clamp-2 mb-3">
+ <?php echo \htmlentities($bPlayer['description']??'', ENT_QUOTES, 'UTF-8', false); ?> 
+ </p>
+
+ <div class="flex items-center justify-between pt-3 border-t border-[#e3e6e8] dark:border-[#3f4042]">
+ <div>
+ <p class="text-xs text-[#525960] dark:text-[#9fa6ad]">Giá thuê</p>
+ <p class="text-lg font-bold text-[#f48024]"><?php echo \htmlentities($bPlayer['price_per_hour']??'', ENT_QUOTES, 'UTF-8', false); ?> <i class="fas fa-gem text-[#f48024]"></i><span class="text-sm font-normal">/h</span></p>
+ </div>
+ </div>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </a>
+ </div>
+
+ <!-- Pagination -->
+ <div class="mt-8 flex justify-center items-center gap-2">
+ <button class="px-3 py-2 rounded-lg border border-[#d6d9dc] dark:border-[#3f4042] text-[#525960] dark:text-[#9fa6ad] hover:border-[#f48024] hover:text-[#f48024] transition-all disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+ <i class="fas fa-chevron-left"></i>
+ </button>
+ 
+ <button class="px-4 py-2 rounded-lg bg-[#f48024] text-white font-medium">1</button>
+ <button class="px-4 py-2 rounded-lg border border-[#d6d9dc] dark:border-[#3f4042] text-[#525960] dark:text-[#9fa6ad] hover:border-[#f48024] hover:text-[#f48024] transition-all">2</button>
+ <button class="px-4 py-2 rounded-lg border border-[#d6d9dc] dark:border-[#3f4042] text-[#525960] dark:text-[#9fa6ad] hover:border-[#f48024] hover:text-[#f48024] transition-all">3</button>
+ <span class="px-2 text-[#525960] dark:text-[#9fa6ad]">...</span>
+ <button class="px-4 py-2 rounded-lg border border-[#d6d9dc] dark:border-[#3f4042] text-[#525960] dark:text-[#9fa6ad] hover:border-[#f48024] hover:text-[#f48024] transition-all">10</button>
+ 
+ <button class="px-3 py-2 rounded-lg border border-[#d6d9dc] dark:border-[#3f4042] text-[#525960] dark:text-[#9fa6ad] hover:border-[#f48024] hover:text-[#f48024] transition-all">
+ <i class="fas fa-chevron-right"></i>
+ </button>
+ </div>
+ </div>
+
+</div>
+
+
+<script>
+ function toggleFilter(filterName) {
+ const dropdown = document.getElementById(`filter-${filterName}`);
+ const allDropdowns = document.querySelectorAll('.filter-dropdown');
+ allDropdowns.forEach(d => {
+ if (d.id !== `filter-${filterName}`) {
+ d.classList.remove('active');
+ }
+ });
+ dropdown.classList.toggle('active');
+ }
+
+ function clearFilters() {
+ document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+ document.querySelectorAll('input[type="radio"]').forEach(rb => rb.checked = false);
+ document.querySelectorAll('input[type="number"]').forEach(input => input.value = '');
+ document.getElementById('search-input').value = '';
+ 
+ document.querySelectorAll('.filter-dropdown').forEach(d => d.classList.remove('active'));
+ 
+ console.log('Filters cleared!');
+ }
+
+ document.addEventListener('click', function(event) {
+ if (!event.target.closest('button') && !event.target.closest('.filter-dropdown')) {
+ document.querySelectorAll('.filter-dropdown').forEach(d => d.classList.remove('active'));
+ }
+ });
+
+ document.querySelectorAll('#filter-price button').forEach(button => {
+ button.addEventListener('click', function(e) {
+ e.stopPropagation();
+ console.log('Price filter clicked:', this.textContent);
+ });
+ });
+</script>
+
+<?php $this->stopSection(); ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layouts.app'); } ?>

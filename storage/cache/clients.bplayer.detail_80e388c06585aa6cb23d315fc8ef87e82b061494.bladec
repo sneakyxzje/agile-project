@@ -1,0 +1,559 @@
+<?php $_shouldextend[1]=1; ?>
+
+<?php $this->startSection('title', 'BikoDuo'); ?>
+
+<?php $this->startSection('content'); ?>
+
+<div class="bg-white dark:bg-[#2d2d2d] border-b border-[#d6d9dc] dark:border-[#3f4042]">
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+ <nav class="flex" aria-label="Breadcrumb">
+ <ol class="inline-flex items-center space-x-1 md:space-x-3">
+ <li class="inline-flex items-center">
+ <a href="#" class="inline-flex items-center text-sm text-[#525960] dark:text-[#9fa6ad] hover:text-[#f48024] transition-colors">
+ <i class="fas fa-home mr-2"></i>
+ Trang chủ
+ </a>
+ </li>
+ <li>
+ <div class="flex items-center">
+ <i class="fas fa-chevron-right text-[#d6d9dc] dark:text-[#3f4042] mx-2 text-xs"></i>
+ <a href="#" class="text-sm text-[#525960] dark:text-[#9fa6ad] hover:text-[#f48024] transition-colors">Players</a>
+ </div>
+ </li>
+ <li aria-current="page">
+ <div class="flex items-center">
+ <i class="fas fa-chevron-right text-[#d6d9dc] dark:text-[#3f4042] mx-2 text-xs"></i>
+ <span class="text-sm text-[#0c0d0e] dark:text-[#e3e6e8] font-medium"><?php echo \htmlentities($bPlayer->nickname??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ </div>
+ </li>
+ </ol>
+ </nav>
+ </div>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+ 
+ <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+ 
+ <div class="lg:col-span-8 space-y-6">
+ 
+ <div class="bg-white dark:bg-[#2d2d2d] rounded-xl border border-[#d6d9dc] dark:border-[#3f4042] shadow-sm">
+ <div class="p-6">
+ <div class="flex flex-col sm:flex-row gap-6">
+ <div class="relative flex-shrink-0">
+ <div class="relative">
+ <img src="/project/<?php echo \htmlentities($bPlayer->main_image??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="Player" class="w-32 h-32 rounded-2xl object-cover border-4 border-[#f48024] shadow-lg">
+ <div class="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center border-3 border-white dark:border-[#2d2d2d] shadow-lg">
+ <i class="fas fa-check text-white text-sm"></i>
+ </div>
+ <div class="absolute -top-2 -left-2 px-2.5 py-1 rounded-lg bg-green-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg">
+ <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+ Online
+ </div>
+ </div>
+ </div>
+
+ <div class="flex-1 min-w-0">
+ <div class="flex items-start justify-between gap-4 mb-3">
+ <div class="flex-1 min-w-0">
+ <h1 class="text-2xl sm:text-3xl font-bold text-[#0c0d0e] dark:text-[#e3e6e8] mb-1 truncate"><?php echo \htmlentities($bPlayer -> nickname??'', ENT_QUOTES, 'UTF-8', false); ?></h1>
+ <p class="text-sm sm:text-base text-[#525960] dark:text-[#9fa6ad] mb-3">ID: <?php echo \htmlentities($bPlayer -> id??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ <div class="flex flex-wrap items-center gap-4 text-sm">
+ <div class="flex items-center gap-1.5">
+ <i class="fas fa-star text-yellow-500"></i>
+ <span class="font-bold text-[#0c0d0e] dark:text-[#e3e6e8]">4.9</span>
+ <span class="text-[#525960] dark:text-[#9fa6ad]">(128 đánh giá)</span>
+ </div>
+ <div class="flex items-center gap-1.5 text-[#525960] dark:text-[#9fa6ad]">
+ <i class="fas fa-gamepad"></i>
+ <span>250 trận</span>
+ </div>
+ <div class="flex items-center gap-1.5 text-[#525960] dark:text-[#9fa6ad]">
+ <i class="fas fa-heart text-red-500"></i>
+ <span>1.2K</span>
+ </div>
+ </div>
+ </div>
+ <div class="flex-shrink-0 px-3 py-1.5 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-xs font-bold flex items-center gap-1.5">
+ <i class="fas fa-fire"></i>
+ HOT
+ </div>
+ </div>
+
+ <div class="flex flex-wrap gap-2 mb-4">
+ <?php $__currentLoopData = json_decode($bPlayer->games, true); $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $game): $loop = $this->incrementLoopIndices();  ?>
+ <span class="px-3 py-1.5 text-sm rounded-lg bg-[#fff4e6] dark:bg-[#3a2e1f] text-[#f48024] font-medium border border-[#f1e5bc] dark:border-[#4a4a4a]">
+ <i class="fas fa-gamepad mr-1.5"></i>
+ <?php echo \htmlentities(strtoupper($game)??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </span>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+
+ <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+ <div class="text-center p-3 rounded-xl bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 border border-orange-200 dark:border-orange-800">
+ <div class="text-2xl font-bold text-[#f48024] mb-1">250</div>
+ <div class="text-xs text-[#525960] dark:text-[#9fa6ad] font-medium">Trận đấu</div>
+ </div>
+ <div class="text-center p-3 rounded-xl bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 border border-green-200 dark:border-green-800">
+ <div class="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">65%</div>
+ <div class="text-xs text-[#525960] dark:text-[#9fa6ad] font-medium">Tỷ lệ thắng</div>
+ </div>
+ <div class="text-center p-3 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border border-blue-200 dark:border-blue-800">
+ <div class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-1">1.2K</div>
+ <div class="text-xs text-[#525960] dark:text-[#9fa6ad] font-medium">Lượt thích</div>
+ </div>
+ <div class="text-center p-3 rounded-xl bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 border border-purple-200 dark:border-purple-800">
+ <div class="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-1">98%</div>
+ <div class="text-xs text-[#525960] dark:text-[#9fa6ad] font-medium">Hoàn thành</div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="bg-white dark:bg-[#2d2d2d] rounded-xl border border-[#d6d9dc] dark:border-[#3f4042] p-6 shadow-sm">
+ <h2 class="text-xl font-bold text-[#0c0d0e] dark:text-[#e3e6e8] mb-4 flex items-center gap-2">
+ Description
+ </h2>
+ <p class="text-[#525960] dark:text-[#9fa6ad] leading-relaxed mb-4">
+ <?php echo \htmlentities($bPlayer -> description??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </p>
+ <ul class="space-y-3 mb-4">
+ <li class="flex items-start gap-3 text-[#525960] dark:text-[#9fa6ad]">
+ <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mt-0.5">
+ <i class="fas fa-check text-green-600 dark:text-green-400 text-xs"></i>
+ </div>
+ <span>Chu kỳ nhận: Thứ 2 -> Thứ 7 </span>
+ </li>
+ <li class="flex items-start gap-3 text-[#525960] dark:text-[#9fa6ad]">
+ <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mt-0.5">
+ <i class="fas fa-check text-green-600 dark:text-green-400 text-xs"></i>
+ </div>
+ <span>Thời gian nhận: 00:00 -> 23:59</span>
+ </li>
+ <li class="flex items-start gap-3">
+ <div class="flex-shrink-0 w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mt-0.5">
+ <i class="fas fa-microphone text-purple-600 dark:text-purple-400 text-xs"></i>
+ </div>
+ <div class="flex-1">
+ <span class="text-[#525960] dark:text-[#9fa6ad] block mb-2">Giới thiệu bằng giọng nói:</span>
+ <div class="voice-player-wrapper">
+ <audio class="custom-audio-player" controls>
+ <source src="/project/<?php echo \htmlentities($bPlayer->voice??'', ENT_QUOTES, 'UTF-8', false); ?>" type="audio/mpeg">
+ Trình duyệt của bạn không hỗ trợ audio.
+ </audio>
+ </div>
+ </div>
+ </li>
+ </ul>
+ </div>
+
+ <div class="bg-white dark:bg-[#2d2d2d] rounded-xl border border-[#d6d9dc] dark:border-[#3f4042] p-6 shadow-sm">
+ <h2 class="text-xl font-bold text-[#0c0d0e] dark:text-[#e3e6e8] mb-5 flex items-center gap-2">
+ Gallery
+ </h2>
+ <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+ <?php $__currentLoopData = $bPlayer->media; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $media): $loop = $this->incrementLoopIndices();  ?>
+ <div class="aspect-square rounded-xl overflow-hidden cursor-pointer hover:opacity-90 hover:scale-105 transition-all">
+ <img src="/project/<?php echo \htmlentities($media??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="Gallery" class="w-full h-full object-cover">
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+
+ <div class="bg-white dark:bg-[#2d2d2d] rounded-xl border border-[#d6d9dc] dark:border-[#3f4042] p-6 shadow-sm">
+ <div class="flex items-center justify-between mb-6">
+ <h2 class="text-xl font-bold text-[#0c0d0e] dark:text-[#e3e6e8] flex items-center gap-2">
+ <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#f48024] to-[#f69c55] flex items-center justify-center">
+ <i class="fas fa-comments text-white text-sm"></i>
+ </div>
+ Đánh giá
+ </h2>
+ <button onclick="toggleReviewForm()" class="px-4 py-2 rounded-lg bg-[#f48024] text-white hover:bg-[#f69c55] transition-all text-sm font-medium shadow-sm">
+ <i class="fas fa-plus mr-2"></i>
+ Viết đánh giá
+ </button>
+ </div>
+
+ <div id="review-form" class="mb-6 p-5 rounded-xl bg-[#f8f9f9] dark:bg-[#232426] border border-[#e3e6e8] dark:border-[#3f4042] hidden">
+ <h3 class="font-bold text-[#0c0d0e] dark:text-[#e3e6e8] mb-4">Viết đánh giá của bạn</h3>
+ 
+ <div class="mb-4">
+ <label class="text-sm font-medium text-[#525960] dark:text-[#9fa6ad] mb-2 block">Đánh giá</label>
+ <div class="flex gap-2">
+ <i class="fas fa-star text-3xl text-gray-300 dark:text-gray-600 cursor-pointer hover:text-yellow-500 transition-colors rating-star" data-rating="1"></i>
+ <i class="fas fa-star text-3xl text-gray-300 dark:text-gray-600 cursor-pointer hover:text-yellow-500 transition-colors rating-star" data-rating="2"></i>
+ <i class="fas fa-star text-3xl text-gray-300 dark:text-gray-600 cursor-pointer hover:text-yellow-500 transition-colors rating-star" data-rating="3"></i>
+ <i class="fas fa-star text-3xl text-gray-300 dark:text-gray-600 cursor-pointer hover:text-yellow-500 transition-colors rating-star" data-rating="4"></i>
+ <i class="fas fa-star text-3xl text-gray-300 dark:text-gray-600 cursor-pointer hover:text-yellow-500 transition-colors rating-star" data-rating="5"></i>
+ </div>
+ </div>
+
+ <div class="mb-4">
+ <label class="text-sm font-medium text-[#525960] dark:text-[#9fa6ad] mb-2 block">Nhận xét</label>
+ <textarea rows="4" placeholder="Chia sẻ trải nghiệm của bạn..." class="w-full px-4 py-3 rounded-lg border border-[#d6d9dc] dark:border-[#3f4042] bg-white dark:bg-[#2d2d2d] text-[#0c0d0e] dark:text-[#e3e6e8] focus:outline-none focus:ring-2 focus:ring-[#f48024] resize-none"></textarea>
+ </div>
+
+ <div class="flex gap-3">
+ <button class="px-5 py-2.5 rounded-lg bg-[#f48024] text-white hover:bg-[#f69c55] transition-all font-medium shadow-sm">
+ Gửi đánh giá
+ </button>
+ <button type="button" onclick="toggleReviewForm()" class="px-5 py-2.5 rounded-lg border border-[#d6d9dc] dark:border-[#3f4042] text-[#525960] dark:text-[#9fa6ad] hover:border-[#f48024] hover:text-[#f48024] transition-all">
+ Hủy
+ </button>
+ </div>
+ </div>
+
+ <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-6 pb-6 border-b border-[#e3e6e8] dark:border-[#3f4042]">
+ <div class="text-center sm:text-left">
+ <div class="text-5xl font-bold text-[#f48024] mb-2">4.9</div>
+ <div class="flex items-center justify-center sm:justify-start gap-1 mb-2">
+ <i class="fas fa-star text-yellow-500"></i>
+ <i class="fas fa-star text-yellow-500"></i>
+ <i class="fas fa-star text-yellow-500"></i>
+ <i class="fas fa-star text-yellow-500"></i>
+ <i class="fas fa-star text-yellow-500"></i>
+ </div>
+ <div class="text-sm text-[#525960] dark:text-[#9fa6ad]">128 đánh giá</div>
+ </div>
+ <div class="flex-1 w-full space-y-2">
+ <div class="flex items-center gap-3">
+ <span class="text-sm text-[#525960] dark:text-[#9fa6ad] w-12">5 sao</span>
+ <div class="flex-1 bg-[#e3e6e8] dark:bg-[#3a3a3a] rounded-full h-2">
+ <div class="bg-yellow-500 h-2 rounded-full" style="width: 85%"></div>
+ </div>
+ <span class="text-sm text-[#525960] dark:text-[#9fa6ad] w-10 text-right">109</span>
+ </div>
+ <div class="flex items-center gap-3">
+ <span class="text-sm text-[#525960] dark:text-[#9fa6ad] w-12">4 sao</span>
+ <div class="flex-1 bg-[#e3e6e8] dark:bg-[#3a3a3a] rounded-full h-2">
+ <div class="bg-yellow-500 h-2 rounded-full" style="width: 10%"></div>
+ </div>
+ <span class="text-sm text-[#525960] dark:text-[#9fa6ad] w-10 text-right">13</span>
+ </div>
+ <div class="flex items-center gap-3">
+ <span class="text-sm text-[#525960] dark:text-[#9fa6ad] w-12">3 sao</span>
+ <div class="flex-1 bg-[#e3e6e8] dark:bg-[#3a3a3a] rounded-full h-2">
+ <div class="bg-yellow-500 h-2 rounded-full" style="width: 3%"></div>
+ </div>
+ <span class="text-sm text-[#525960] dark:text-[#9fa6ad] w-10 text-right">4</span>
+ </div>
+ <div class="flex items-center gap-3">
+ <span class="text-sm text-[#525960] dark:text-[#9fa6ad] w-12">2 sao</span>
+ <div class="flex-1 bg-[#e3e6e8] dark:bg-[#3a3a3a] rounded-full h-2">
+ <div class="bg-yellow-500 h-2 rounded-full" style="width: 1%"></div>
+ </div>
+ <span class="text-sm text-[#525960] dark:text-[#9fa6ad] w-10 text-right">1</span>
+ </div>
+ <div class="flex items-center gap-3">
+ <span class="text-sm text-[#525960] dark:text-[#9fa6ad] w-12">1 sao</span>
+ <div class="flex-1 bg-[#e3e6e8] dark:bg-[#3a3a3a] rounded-full h-2">
+ <div class="bg-yellow-500 h-2 rounded-full" style="width: 1%"></div>
+ </div>
+ <span class="text-sm text-[#525960] dark:text-[#9fa6ad] w-10 text-right">1</span>
+ </div>
+ </div>
+ </div>
+
+ <div class="space-y-6">
+ <div class="flex gap-4">
+ <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=User1" alt="User" class="w-12 h-12 rounded-full flex-shrink-0">
+ <div class="flex-1">
+ <div class="flex items-start justify-between mb-2">
+ <div>
+ <h4 class="font-bold text-[#0c0d0e] dark:text-[#e3e6e8]">Trần Văn B</h4>
+ <div class="flex items-center gap-2 text-sm text-[#525960] dark:text-[#9fa6ad]">
+ <div class="flex items-center gap-1">
+ <i class="fas fa-star text-yellow-500 text-xs"></i>
+ <i class="fas fa-star text-yellow-500 text-xs"></i>
+ <i class="fas fa-star text-yellow-500 text-xs"></i>
+ <i class="fas fa-star text-yellow-500 text-xs"></i>
+ <i class="fas fa-star text-yellow-500 text-xs"></i>
+ </div>
+ <span>•</span>
+ <span>2 ngày trước</span>
+ </div>
+ </div>
+ </div>
+ <p class="text-[#525960] dark:text-[#9fa6ad] leading-relaxed mb-3">
+ Player rất nhiệt tình và chuyên nghiệp. Mình đã học được rất nhiều kỹ năng mới và tăng rank nhanh chóng. Chắc chắn sẽ thuê lại!
+ </p>
+ <div class="flex items-center gap-4 text-sm">
+ <button class="text-[#525960] dark:text-[#9fa6ad] hover:text-[#f48024] transition-colors">
+ <i class="far fa-thumbs-up mr-1"></i>
+ Hữu ích (12)
+ </button>
+ <button class="text-[#525960] dark:text-[#9fa6ad] hover:text-[#f48024] transition-colors">
+ <i class="far fa-comment mr-1"></i>
+ Trả lời
+ </button>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="mt-6 text-center">
+ <button class="px-6 py-3 rounded-lg border-2 border-[#d6d9dc] dark:border-[#3f4042] text-[#525960] dark:text-[#9fa6ad] hover:border-[#f48024] hover:text-[#f48024] transition-all font-medium">
+ Xem thêm đánh giá <i class="fas fa-chevron-down ml-2"></i>
+ </button>
+ </div>
+ </div>
+
+ </div>
+
+ <div class="lg:col-span-4">
+ <div class="sticky top-6 space-y-4">
+ 
+ <div class="bg-white dark:bg-[#2d2d2d] rounded-xl border-2 border-[#d6d9dc] dark:border-[#3f4042] p-6 shadow-lg">
+ <div class="mb-6">
+ <div class="flex items-baseline gap-2 mb-2">
+ <span class="text-4xl font-bold text-[#f48024]"><?php echo \htmlentities($bPlayer -> price_per_hour??'', ENT_QUOTES, 'UTF-8', false); ?> <i class="fas fa-gem text-3xl"></i></span>
+ <span class="text-lg text-[#525960] dark:text-[#9fa6ad]">/giờ</span>
+ </div>
+ <p class="text-sm text-[#525960] dark:text-[#9fa6ad]">Giá có thể thay đổi theo thời gian thuê</p>
+ </div>
+
+ <div class="space-y-4">
+
+ <button type="button" id="open-booking-modal-btn" class="w-full py-4 rounded-xl font-bold text-white text-lg transition-all shadow-lg hover:shadow-xl hover:scale-105" style="background: linear-gradient(135deg, #f48024 0%, #f69c55 100%);">
+ Đặt đơn
+ </button>
+ <button type="button" class="w-full dark:text-[#9fa6ad] py-4 rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:scale-105 border-2 border-[#d6d9dc] dark:border-[#3f4042]">
+ Trò chuyện
+ </button>
+ </div>
+
+ <div class="mt-5 pt-5 border-t border-[#e3e6e8] dark:border-[#3f4042] space-y-3">
+ <div class="flex items-center gap-3 text-sm">
+ <div class="w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
+ <i class="fas fa-shield-alt text-green-600 dark:text-green-400"></i>
+ </div>
+ <span class="text-[#525960] dark:text-[#9fa6ad]">Thanh toán được bảo vệ</span>
+ </div>
+ <div class="flex items-center gap-3 text-sm">
+ <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
+ <i class="fas fa-undo text-blue-600 dark:text-blue-400"></i>
+ </div>
+ <span class="text-[#525960] dark:text-[#9fa6ad]">Hoàn tiền nếu player hủy</span>
+ </div>
+ <div class="flex items-center gap-3 text-sm">
+ <div class="w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center flex-shrink-0">
+ <i class="fas fa-headset text-purple-600 dark:text-purple-400"></i>
+ </div>
+ <span class="text-[#525960] dark:text-[#9fa6ad]">Hỗ trợ 24/7</span>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+</div>
+
+
+<div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+ <div id="booking-modal-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm modal-overlay"></div>
+ <div id="booking-modal-content" class="relative bg-white dark:bg-[#2d2d2d] rounded-2xl shadow-xl w-full max-w-lg mx-4 p-6 sm:p-8 modal-content">
+ <div class="flex items-start justify-between mb-6">
+ <div>
+ <h2 class="text-2xl font-bold text-[#0c0d0e] dark:text-[#e3e6e8]">Đặt đơn</h2>
+ <p class="text-sm text-[#525960] dark:text-[#9fa6ad]">Điền thông tin để thuê player <span class="font-bold text-[#f48024]"><?php echo \htmlentities($bPlayer->nickname??'', ENT_QUOTES, 'UTF-8', false); ?></span></p>
+ </div>
+ <button id="booking-modal-close-btn" class="text-[#9fa6ad] hover:text-[#f48024] transition-colors">
+ <i class="fas fa-times text-2xl"></i>
+ </button>
+ </div>
+
+ <form action="<?php echo \htmlentities(route('rent')??'', ENT_QUOTES, 'UTF-8', false); ?>" method="POST" id="booking-form-inside-modal">
+ <div class="space-y-4">
+ <div>
+ <input type="hidden" name="userId" value="<?= $userId ?>" />
+ <input type="hidden" name="bPlayerId" value="<?php echo \htmlentities($bPlayer->id??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <input type="hidden" name="total_price" id="total-price-input">
+ <label for="hours-input" class="text-sm font-medium text-[#525960] dark:text-[#9fa6ad] mb-2 block">Số giờ thuê</label>
+ <div class="flex items-center">
+ <button type="button" onclick="changeHours(-1)" class="px-4 h-12 rounded-l-lg border border-r-0 border-[#d6d9dc] dark:border-[#3f4042] text-xl">-</button>
+ <input type="number" name="hours" id="hours-input" value="1" min="1" class="w-full h-12 text-center font-bold border-y border-[#d6d9dc] dark:border-[#3f4042] bg-white dark:bg-[#3f4042] text-[#0c0d0e] dark:text-[#e3e6e8] focus:outline-none focus:ring-2 focus:ring-[#f48024] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+ <button type="button" onclick="changeHours(1)" class="px-4 h-12 rounded-r-lg border border-l-0 border-[#d6d9dc] dark:border-[#3f4042] text-xl">+</button>
+ </div>
+ </div>
+ </div>
+
+ <div class="mt-6 pt-6 border-t border-[#e3e6e8] dark:border-[#3f4042] space-y-2">
+ <div class="flex justify-between text-sm">
+ <span class="text-[#525960] dark:text-[#9fa6ad]">Tiền thuê (<span id="hours-display">1</span> giờ)</span>
+ <span id="subtotal" class="font-medium text-[#0c0d0e] dark:text-[#e3e6e8]">0đ</span>
+ </div>
+ <div class="flex justify-between text-lg font-bold">
+ <span class="text-[#0c0d0e] dark:text-[#e3e6e8]">Tổng cộng</span>
+ <span id="total" name="total" class="text-[#f48024]">0đ</span>
+ </div>
+ </div>
+
+ <div class="mt-6 flex flex-col sm:flex-row gap-3">
+ <button type="submit" class="w-full py-3 rounded-lg bg-[#f48024] text-white hover:bg-[#f69c55] transition-all font-bold shadow-sm">
+ Xác nhận & Thanh toán
+ </button>
+ <button type="button" id="booking-modal-cancel-btn" class="w-full sm:w-auto px-6 py-3 rounded-lg border border-[#d6d9dc] dark:border-[#3f4042] text-[#525960] dark:text-[#9fa6ad] hover:border-[#f48024] hover:text-[#f48024] transition-all font-bold">
+ Hủy
+ </button>
+ </div>
+ </form>
+ </div>
+</div>
+<style>
+/* --- CSS CHO MODAL --- */
+@keyframes pulse {
+ 0%, 100% { opacity: 1; }
+ 50% { opacity: 0.5; }
+}
+.animate-pulse {
+ animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+#booking-modal.modal-open .modal-overlay {
+ animation: fadeIn 0.3s ease-out forwards;
+}
+#booking-modal.modal-open .modal-content {
+ animation: scaleUp 0.3s ease-out forwards;
+}
+#booking-modal.modal-closing .modal-overlay {
+ animation: fadeOut 0.2s ease-in forwards;
+}
+#booking-modal.modal-closing .modal-content {
+ animation: scaleDown 0.2s ease-in forwards;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes scaleUp { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes scaleDown { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.95); } }
+
+
+/* Custom Audio Player Styles */
+.custom-audio-player {
+ width: 100%; height: 48px; outline: none; border-radius: 12px;
+ background: linear-gradient(135deg, #f48024 0%, #f69c55 100%);
+ transition: all 0.3s ease;
+ box-shadow: 0 2px 8px rgba(244, 128, 36, 0.2);
+}
+.voice-player-wrapper:hover .custom-audio-player {
+ box-shadow: 0 4px 12px rgba(244, 128, 36, 0.3);
+ transform: translateY(-1px);
+}
+/* ... (các style khác cho audio player giữ nguyên) ... */
+.custom-audio-player::-webkit-media-controls-panel { background: transparent; }
+.custom-audio-player::-webkit-media-controls-play-button { background-color: rgba(255, 255, 255, 0.3); border-radius: 50%; margin-left: 8px; }
+.custom-audio-player::-webkit-media-controls-current-time-display,
+.custom-audio-player::-webkit-media-controls-time-remaining-display { color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.2); font-weight: 600; font-size: 12px;}
+.custom-audio-player::-webkit-media-controls-timeline { background: rgba(255, 255, 255, 0.3); border-radius: 25px; margin: 0 8px; }
+.dark .custom-audio-player { background: linear-gradient(135deg, #d97018 0%, #e68a47 100%); }
+
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+ 
+ // --- LOGIC ĐIỀU KHIỂN MODAL ---
+ const bookingModal = document.getElementById('booking-modal');
+ const openModalBtn = document.getElementById('open-booking-modal-btn');
+ const closeModalBtns = [
+ document.getElementById('booking-modal-overlay'),
+ document.getElementById('booking-modal-close-btn'),
+ document.getElementById('booking-modal-cancel-btn')
+ ];
+
+ const openModal = () => {
+ bookingModal.classList.remove('hidden');
+ document.body.classList.add('overflow-hidden'); // Chống scroll body khi modal mở
+ bookingModal.classList.add('modal-open');
+ bookingModal.classList.remove('modal-closing');
+ updatePrice();
+ };
+
+ const closeModal = () => {
+ bookingModal.classList.add('modal-closing');
+ bookingModal.classList.remove('modal-open');
+ document.body.classList.remove('overflow-hidden');
+ setTimeout(() => {
+ bookingModal.classList.add('hidden');
+ }, 200); // 200ms khớp với animation
+ };
+
+ openModalBtn.addEventListener('click', openModal);
+ closeModalBtns.forEach(btn => btn.addEventListener('click', closeModal));
+
+ // Đóng modal bằng phím Escape
+ document.addEventListener('keydown', (e) => {
+ if (e.key === 'Escape' && !bookingModal.classList.contains('hidden')) {
+ closeModal();
+ }
+ });
+
+
+ const reviewForm = document.getElementById('review-form');
+ window.toggleReviewForm = function() {
+ reviewForm.classList.toggle('hidden');
+ }
+
+ const stars = document.querySelectorAll('.rating-star');
+ let currentRating = 0;
+ stars.forEach(star => {
+ star.addEventListener('click', function() {
+ currentRating = parseInt(this.getAttribute('data-rating'));
+ updateStars(currentRating);
+ });
+ star.addEventListener('mouseenter', function() {
+ const rating = parseInt(this.getAttribute('data-rating'));
+ updateStars(rating);
+ });
+ });
+ if (reviewForm) {
+ reviewForm.addEventListener('mouseleave', () => updateStars(currentRating));
+ }
+ function updateStars(rating) {
+ stars.forEach((star, index) => {
+ if (index < rating) {
+ star.classList.remove('text-gray-300', 'dark:text-gray-600');
+ star.classList.add('text-yellow-500');
+ } else {
+ star.classList.remove('text-yellow-500');
+ star.classList.add('text-gray-300', 'dark:text-gray-600');
+ }
+ });
+ }
+
+ const hoursInput = document.getElementById('hours-input');
+ const pricePerHour = parseInt('<?php echo \htmlentities($bPlayer->price_per_hour??'', ENT_QUOTES, 'UTF-8', false); ?>');
+
+ window.changeHours = function(amount) {
+ let currentValue = parseInt(hoursInput.value);
+ if (currentValue + amount >= 1) {
+ hoursInput.value = currentValue + amount;
+ updatePrice();
+ }
+ };
+ 
+ hoursInput.addEventListener('input', updatePrice);
+
+function updatePrice() {
+ const hours = parseInt(hoursInput.value) || 1;
+ const subtotal = pricePerHour * hours;
+ const total = subtotal; 
+
+ document.getElementById('hours-display').textContent = hours;
+ document.getElementById('subtotal').textContent = subtotal + '💎';
+ document.getElementById('total').textContent = total + '💎';
+
+ // Cập nhật giá trị cho input ẩn để gửi đi
+ document.getElementById('total-price-input').value = total;
+}
+ 
+});
+</script>
+<?php $this->stopSection(); ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layouts.app'); } ?>
