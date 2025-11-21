@@ -17,7 +17,7 @@ class BPlayer extends BaseModel {
 
     public static function findBPlayerById($id) {
         $model = new static;
-        $query = "SELECT id, nickname, price_per_hour, games, main_image, description, voice, media FROM {$model->table} WHERE id = :id";
+        $query = "SELECT id, nickname, user_id, price_per_hour, games, main_image, description, voice, media FROM {$model->table} WHERE id = :id";
         $stmt = $model -> conn -> prepare($query);
         $stmt -> execute(['id' => $id]);
         return $stmt -> fetch(\PDO::FETCH_OBJ);
