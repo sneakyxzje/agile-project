@@ -16,6 +16,9 @@
   "require": {
     "bramus/router": "^1.6",
     "eftec/bladeone": "^4.19",
-    "doctrine/dbal": "^4.3"
+    "doctrine/dbal": "^4.3",
+    "cboden/ratchet": "^0.4.4",
+    "predis/predis": "^3.2",
+    "clue/redis-react": "^2.8"
   }
 }
