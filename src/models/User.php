@@ -61,6 +61,23 @@ class User extends BaseModel {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public static function getChatInfo($userId) {
+        $model = new static;
+        
+        $sql = "SELECT 
+                    u.id, 
+                    u.fullname, 
+                    COALESCE(b.main_image, u.avatar, '/assets/images/default-avatar.png') as avatar
+                FROM users u
+                LEFT JOIN bplayers b ON u.id = b.user_id
+                WHERE u.id = :id";
+
+        $stmt = $model->conn->prepare($sql);
+        $stmt->execute(['id' => $userId]);
+        
+        return $stmt->fetch(\PDO::FETCH_ASSOC); 
+    }
+    
     public static function findWithBPlayerInfo(int $id)
     {
         $model = new static;
