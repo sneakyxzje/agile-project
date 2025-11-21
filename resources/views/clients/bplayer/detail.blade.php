@@ -11,7 +11,7 @@
                 <li class="inline-flex items-center">
                     <a href="#" class="inline-flex items-center text-sm text-[#525960] dark:text-[#9fa6ad] hover:text-[#f48024] transition-colors">
                         <i class="fas fa-home mr-2"></i>
-                        Trang chủ
+                        Trang chủ 
                     </a>
                 </li>
                 <li>
@@ -32,7 +32,6 @@
 </div>
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-    
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         <div class="lg:col-span-8 space-y-6">
@@ -319,7 +318,11 @@
                         <button type="button" id="open-booking-modal-btn" class="w-full py-4 rounded-xl font-bold text-white text-lg transition-all shadow-lg hover:shadow-xl hover:scale-105" style="background: linear-gradient(135deg, #f48024 0%, #f69c55 100%);">
                             Đặt đơn
                         </button>
-                        <button type="button" class="w-full dark:text-[#9fa6ad] py-4 rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:scale-105 border-2 border-[#d6d9dc] dark:border-[#3f4042]">
+                        <button type="button" 
+                            class="btn-open-chat w-full dark:text-[#9fa6ad] py-4 rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:scale-105 border-2 border-[#d6d9dc] dark:border-[#3f4042]"
+                            data-id="{{ $bPlayer->user_id }}" 
+                            data-name="{{ $bPlayer->nickname }}" 
+                            data-avatar="/project/{{ $bPlayer->main_image }}">
                             Trò chuyện
                         </button>
                     </div>
@@ -401,6 +404,7 @@
         </form>
     </div>
 </div>
+
 <style>
 @keyframes pulse {
     0%, 100% { opacity: 1; }
@@ -448,9 +452,11 @@
 
 </style>
 
+
+
 <script>
+
 document.addEventListener('DOMContentLoaded', function() {
-    
     const bookingModal = document.getElementById('booking-modal');
     const openModalBtn = document.getElementById('open-booking-modal-btn');
     const closeModalBtns = [
