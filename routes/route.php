@@ -3,6 +3,7 @@
 use App\controllers\AdminController;
 use App\Controllers\AuthController;
 use App\controllers\BPlayerController;
+use App\controllers\ChatController;
 use App\Controllers\HomeController;
 use App\Controllers\PaymentController;
 use App\Controllers\RentController;
@@ -41,6 +42,11 @@ $router->post('/rent/{id}/handle', RentController::class . '@rentHandle');
 $router->post('/rent-confirm/{id}', RentController::class . '@rentConfirm');
 // End of rent
 
+
+// Chat
+$router->post('/chat/send', ChatController::class . '@sendMessage');
+$router->get('/chat/history',ChatController::class . '@loadHistory');
+$router->get('/chat/conversations', ChatController::class . '@getConversations');
 // Admin zone
 $router->before('GET|POST', '/admin/.*', function() {
     if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
